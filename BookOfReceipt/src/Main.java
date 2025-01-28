@@ -1,43 +1,29 @@
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-public class Main{
-	public static void main(String[] args){
-		Connection conn = Database.connect();
-		
-		try {
-			PreparedStatement statement = conn.prepareStatement("SELECT * FROM przepisy");
-			
-			ResultSet resultSet = statement.executeQuery();
-			ArrayList<Przepis> przepisyy = new ArrayList<Przepis>();
+import java.util.Scanner;
 
-			while (resultSet.next()) {    
-				Boolean vege = resultSet.getBoolean("vege");
-				Przepis przepiss;
-				if(vege) {
-					przepiss = new PrzepisVege(resultSet.getInt("ilosc_skladnikow"), resultSet.getString("instrukcje"), resultSet.getString("nazwa"));
-				} else {
-					przepiss = new Przepis(resultSet.getInt("ilosc_skladnikow"), resultSet.getString("instrukcje"), resultSet.getString("nazwa"));
-				}
-				przepisyy.add(przepiss);
-				
-			}                             
-			for(Przepis p: przepisyy) {
+public class Main {
+	public static void main(String[] args) {
+		Exdb expo = new Exdb();
+		Wyb wy = new Wyb();
+		Scanner scan = new Scanner(System.in);
+
+
+		System.out.println("Wybierz typ przepisu:");
+		expo.printType();
+
+
+		int a = scan.nextInt();
+
+
+		ArrayList<Przepis> wynik = wy.choT(a);
+
+
+		if (wynik != null && !wynik.isEmpty()) {
+			for (Przepis p : wynik) {
 				p.wypiszPrzepis();
 			}
-		
-		
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
+		} else {
+			System.out.println("Brak przepisów w wybranej kategorii.");
 		}
-		
-		
-		          	
-		             	
-		          
-
-
-}}
+	}
+}
