@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2024 at 06:09 AM
--- Wersja serwera: 10.4.32-MariaDB
--- Wersja PHP: 8.2.12
+-- Generation Time: Sty 29, 2025 at 07:29 AM
+-- Wersja serwera: 10.4.28-MariaDB
+-- Wersja PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `przepisy` (
   `id_przepisu` int(11) NOT NULL,
   `nazwa` varchar(255) DEFAULT NULL,
+  `typ` varchar(30) NOT NULL,
   `instrukcje` text DEFAULT NULL,
   `ilosc_skladnikow` int(11) DEFAULT NULL,
   `vege` tinyint(1) DEFAULT NULL,
@@ -40,9 +41,10 @@ CREATE TABLE `przepisy` (
 -- Dumping data for table `przepisy`
 --
 
-INSERT INTO `przepisy` (`id_przepisu`, `nazwa`, `instrukcje`, `ilosc_skladnikow`, `vege`, `poziom_ostr`) VALUES
-(1, 'Zupa pomidorowa', 'Obierz pomidory, cebulę. Wszystko razem ugotuj w wodzie. Dodaj liście laurowe, sól i pieprz.', 6, 1, 1),
-(2, 'Rosół', 'Ugotuj mięso z warzywami (marchew, pietruszka, seler). Dodaj makaron i przyprawy.', 9, 0, 1);
+INSERT INTO `przepisy` (`id_przepisu`, `nazwa`, `typ`, `instrukcje`, `ilosc_skladnikow`, `vege`, `poziom_ostr`) VALUES
+(1, 'Zupa pomidorowa', 'Obiad', 'Obierz pomidory, cebulę. Wszystko razem ugotuj w wodzie. Dodaj liście laurowe, sól i pieprz.', 6, 1, 1),
+(2, 'Rosół', 'Obiad', 'Ugotuj mięso z warzywami (marchew, pietruszka, seler). Dodaj makaron i przyprawy.', 9, 0, 1),
+(3, 'Tiramisu', 'Deser', '...', 9, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -138,7 +140,7 @@ ALTER TABLE `skladniki`
 -- AUTO_INCREMENT for table `przepisy`
 --
 ALTER TABLE `przepisy`
-  MODIFY `id_przepisu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_przepisu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `skladniki`
